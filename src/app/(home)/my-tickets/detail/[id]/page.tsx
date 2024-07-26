@@ -6,6 +6,7 @@ import React from "react";
 import TransactionDetail from "./components/transaction-detail";
 import FlightDetail from "./components/flight-detail";
 import { getDetailTicket } from "../../lib/data";
+import { dateFormat } from "@/lib/utils";
 
 type Params = {
   id: string;
@@ -16,9 +17,7 @@ interface DetailTicketProps {
 }
 export default async function DetailTicketPage({ params }: DetailTicketProps) {
   const data = await getDetailTicket(params.id);
-  console.log("====================================");
-  console.log(data);
-  console.log("====================================");
+
   return (
     <>
       <section
@@ -33,10 +32,10 @@ export default async function DetailTicketPage({ params }: DetailTicketProps) {
             </p>
             <div className="flex flex-col gap-1">
               <h1 className="font-bold text-[32px] leading-[48px]">
-                Jakarta to Shanghai
+                {data?.flight.departureCity} to {data?.flight.destinationCity}
               </h1>
               <p className="font-medium text-lg leading-[27px]">
-                10 March 2024
+                {data?.bookingDate ? dateFormat(data?.bookingDate) : ""}
               </p>
             </div>
           </div>
