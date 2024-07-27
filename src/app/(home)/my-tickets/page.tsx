@@ -5,11 +5,25 @@ import TicketCard from "./components/ticket-card";
 import { getUser } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { getMyTickets } from "./lib/data";
+import { User } from "lucia";
+import { Session } from "lucia";
 
-export default async function MyTicketsPage() {
-  const { session, user } = await getUser();
+interface MyTicketsProps {
+  session: Session | null;
+  user: User | null;
+}
+
+export default async function MyTicketsPage({ user, session }: MyTicketsProps) {
+  // const { session, user } = await getUser();
+  console.log("====================================");
+  console.log(user);
+  console.log("====================================");
 
   if (!session) {
+    return redirect("/sign-in");
+  }
+  // Jika user atau user.id tidak ada, redirect ke halaman sign-in
+  if (!user || !user.id) {
     return redirect("/sign-in");
   }
 
