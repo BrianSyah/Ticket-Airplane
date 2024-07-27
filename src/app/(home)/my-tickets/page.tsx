@@ -2,7 +2,6 @@
 import Navbar from "@/app/components/navbar";
 import React from "react";
 import TicketCard from "./components/ticket-card";
-import { getUser } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { getMyTickets } from "./lib/data";
 import { User } from "lucia";
@@ -13,11 +12,8 @@ interface MyTicketsProps {
   user: User | null;
 }
 
-export default async function MyTicketsPage({ user, session }: MyTicketsProps) {
+export async function MyTicketsPage({ user, session }: MyTicketsProps) {
   // const { session, user } = await getUser();
-  console.log("====================================");
-  console.log(user);
-  console.log("====================================");
 
   if (!session) {
     return redirect("/sign-in");
