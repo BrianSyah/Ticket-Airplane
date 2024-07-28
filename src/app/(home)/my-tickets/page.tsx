@@ -2,28 +2,20 @@
 import Navbar from "@/app/components/navbar";
 import React from "react";
 import TicketCard from "./components/ticket-card";
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { getMyTickets } from "./lib/data";
-import { User } from "lucia";
-import { Session } from "lucia";
+import { getUser } from "@/lib/auth";
 
-interface MyTicketsProps {
-  session: Session | null;
-  user: User | null;
-}
-
-export async function MyTicketsPage({ user, session }: MyTicketsProps) {
-  // const { session, user } = await getUser();
+export default async function MyTicketsPage() {
+  const { session, user } = await getUser();
 
   if (!session) {
     return redirect("/sign-in");
-  }
-  // Jika user atau user.id tidak ada, redirect ke halaman sign-in
-  if (!user || !user.id) {
+  } else if (user?.role === "ADMIN") {
     return redirect("/sign-in");
   }
 
-  const data = await getMyTickets(user.id);
+  const data = await getMyTickets(user?.id);
 
   return (
     <>
@@ -33,6 +25,7 @@ export async function MyTicketsPage({ user, session }: MyTicketsProps) {
       >
         <div className="Header-content bg-gradient-to-r from-[#080318] to-[rgba(8,3,24,0)] h-[290px]">
           <Navbar />
+          ``
           <div className="title container max-w-[1130px] mx-auto flex flex-col gap-1 pt-[50px] pb-[68px]">
             <h1 className="font-bold text-[32px] leading-[48px]">My Tickets</h1>
             <p className="font-medium text-lg leading-[27px]">

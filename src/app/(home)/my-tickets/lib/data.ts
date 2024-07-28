@@ -1,6 +1,6 @@
 import prisma from "../../../../../lib/prisma";
 
-export const getMyTickets = async (id: string) => {
+export const getMyTickets = async (id: string | undefined) => {
   try {
     const data = await prisma.ticket.findMany({
       where: {
