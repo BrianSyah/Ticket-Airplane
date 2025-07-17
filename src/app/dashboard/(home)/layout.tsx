@@ -32,7 +32,7 @@ export default async function DashboardLayout({
         <section className="bg-white text-black">
           <nav className="border-b-4 border-muted p-5">
             <div className="flex flex-row items-center justify-between">
-              <span className="fon-bold text-primary">Fly Bryzen</span>
+              <span className="font-bold text-primary">Fly Bryzen</span>
             </div>
           </nav>
           <section className="flex flex-row gap-5 items-center flex-nowrap">

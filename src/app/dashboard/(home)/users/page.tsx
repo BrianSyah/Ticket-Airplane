@@ -1,9 +1,9 @@
 import React from "react";
 import type { Metadata } from "next";
 
-import { DataTable } from "@/components/ui/data-table";
 import { columns } from "./components/columns-user";
 import { getCustomers } from "./lib/data";
+import { DataTable } from "@/components/ui/data-table";
 
 export const metadata: Metadata = {
   title: "Dashboard | Users",
